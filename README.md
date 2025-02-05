@@ -1,64 +1,84 @@
-# Sentimental-analysis-using-CNN-and-HNN-
-Sentiment Analysis using CNN and HAN Models
-This project implements sentiment analysis using two different deep learning models:
+Here is a `README.md` file for your project:
 
-Convolutional Neural Network (CNN): A simple CNN model to classify sentiment based on text input.
-Hierarchical Attention Network (HAN): A more advanced model that uses attention mechanisms to focus on important words for better sentiment prediction.
-Both models are trained on the NLTK Movie Reviews dataset, which contains positive and negative movie reviews. The models are trained to predict the sentiment of a given movie review as either Positive or Negative.
+```markdown
+# Sentiment Analysis using CNN and HAN Models
 
-Project Structure
-cnn_sentiment_model.h5: Trained CNN model for sentiment analysis.
-han_sentiment_model.h5: Trained HAN model for sentiment analysis.
-tokenizer.pkl: Tokenizer used for processing text data.
-sentiment_analysis.py: Python script that loads the models, tokenizes input text, and performs sentiment prediction.
-README.md: This file.
-Requirements
-To run this project, you'll need the following dependencies:
+This project demonstrates sentiment analysis on movie reviews using two different deep learning models: Convolutional Neural Network (CNN) and Hierarchical Attention Network (HAN). The models are trained on the NLTK movie reviews dataset and can predict whether a given review is positive or negative.
 
-TensorFlow
-Keras
-NLTK
-Gradio
-scikit-learn
-numpy
-pandas
-You can install these dependencies by running the following:
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Models](#models)
+  - [CNN Model](#cnn-model)
+  - [HAN Model](#han-model)
+- [Gradio Interface](#gradio-interface)
+- [License](#license)
 
-bash
-Copy
-Edit
-pip install tensorflow nltk gradio scikit-learn numpy pandas
-Model Training
-To train the models:
+## Installation
 
-Data Preparation: The NLTK Movie Reviews dataset is used. It's loaded and preprocessed into tokenized sequences.
-Model Building: Two models are built using Keras:
-CNN Model: A simple Convolutional Neural Network with an embedding layer, convolution layer, and a dense output layer.
-HAN Model: A Hierarchical Attention Network that uses LSTM and attention mechanisms.
-Training: Both models are trained using the binary cross-entropy loss function and the Adam optimizer.
-After training, the models are saved to disk for future inference.
+To run this project, you need to install the required dependencies. You can do this by running the following command:
 
-Sentiment Prediction
-To use the models for prediction:
+```bash
+pip install tensorflow gradio nltk scikit-learn pandas h5py
+```
 
-Load the models and the tokenizer.
-Preprocess the input text to convert it into a format suitable for the models.
-Use the models to predict the sentiment of the text.
-Display the results: Each model provides a probability of the sentiment being Positive or Negative.
-Gradio Interface
-A Gradio interface is provided to interact with the models through a simple web interface. You can input any text and get the sentiment predictions from both models.
+Additionally, you need to download the NLTK movie reviews dataset:
 
-To launch the Gradio interface:
+```python
+import nltk
+nltk.download('movie_reviews')
+```
 
-python
+## Usage
+
+1. **Data Preparation**: The dataset is loaded and preprocessed using tokenization and padding.
+2. **Model Training**: The CNN and HAN models are trained on the preprocessed data.
+3. **Prediction**: The trained models can be used to predict the sentiment of new reviews.
+4. **Gradio Interface**: A web-based interface is provided to interact with the models and get predictions.
+
+### Running the Notebook
+
+1. Open the Jupyter notebook `sentimental_analysis_of_cnn_and_hnn_.ipynb`.
+2. Run each cell sequentially to load the data, train the models, and make predictions.
+3. Use the Gradio interface to input text and get sentiment predictions.
+
+## Models
+
+### CNN Model
+
+The CNN model consists of the following layers:
+- **Embedding Layer**: Converts words into dense vectors.
+- **Conv1D Layer**: Applies convolutional filters to extract features.
+- **GlobalMaxPooling1D Layer**: Reduces the dimensionality of the output.
+- **Dense Layers**: Fully connected layers for classification.
+
+### HAN Model
+
+The HAN model uses a hierarchical attention mechanism to focus on important parts of the text. It consists of:
+- **Embedding Layer**: Converts words into dense vectors.
+- **Bidirectional LSTM**: Captures contextual information from the text.
+- **Attention Layer**: Weights the importance of different parts of the text.
+- **Dense Layer**: Output layer for classification.
+
+## Gradio Interface
+
+The project includes a Gradio interface that allows users to input text and get sentiment predictions from both the CNN and HAN models. The interface can be launched using the following code:
+
+```python
 interface = gr.Interface(fn=predict_sentiment, inputs="text", outputs="text")
 interface.launch(share=True)
-This will open a local or publicly accessible link where you can input text and receive predictions from both the CNN and HAN models.
+```
 
-python
-test_text = "The movie was amazing!"
-predict_sentiment(test_text)
-Expected Output:
-plaintext
-CNN Model Prediction: Positive (0.9062)
-HAN Model Prediction: Positive (0.9305)
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+```
+
+### Explanation:
+- **Installation**: Lists the required dependencies and how to install them.
+- **Usage**: Provides a step-by-step guide on how to run the notebook and use the models.
+- **Models**: Describes the architecture of the CNN and HAN models.
+- **Gradio Interface**: Explains how to use the Gradio interface for interactive predictions.
+- **License**: Specifies the license under which the project is distributed.
+
+You can save this content in a file named `README.md` in your project directory.
